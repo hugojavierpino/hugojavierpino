@@ -1,0 +1,107 @@
+backend:
+  name: github
+  repo: hugojavierpino/hugojavierpino
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+locale: "es"
+
+collections:
+
+  - name: "blog"
+    label: "Blog"
+    label_singular: "Artículo"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "DD/MM/YYYY", timeFormat: false }
+      - label: "Categoría"
+        name: "categoria"
+        widget: "select"
+        options:
+          - { label: "Teología", value: "teologia" }
+          - { label: "Hermenéutica", value: "hermeneutica" }
+          - { label: "Vida cristiana", value: "vida-cristiana" }
+          - { label: "Pastoral", value: "pastoral" }
+          - { label: "Eclesiología", value: "eclesiologia" }
+      - { label: "Destacado", name: "destacado", widget: "boolean", default: false }
+      - { label: "Resumen", name: "resumen", widget: "text" }
+      - { label: "Tiempo de lectura (ej: 5 min)", name: "lectura", widget: "string", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "audios"
+    label: "Audios / Sermones"
+    label_singular: "Sermón"
+    folder: "content/audios"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título del sermón", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "DD/MM/YYYY", timeFormat: false }
+      - { label: "Serie / Contexto", name: "serie", widget: "string", required: false }
+      - { label: "Pasaje bíblico", name: "pasaje", widget: "string", required: false }
+      - { label: "Duración (ej: 45:20)", name: "duracion", widget: "string", required: false }
+      - label: "Tipo"
+        name: "tipo"
+        widget: "select"
+        options:
+          - { label: "Sermón dominical", value: "sermon" }
+          - { label: "Conferencia", value: "conferencia" }
+          - { label: "Devocional", value: "devocional" }
+          - { label: "Clase / Enseñanza", value: "clase" }
+      - { label: "Archivo de audio", name: "audio_url", widget: "file", required: false }
+      - { label: "Link externo (YouTube, SoundCloud, etc.)", name: "link_externo", widget: "string", required: false }
+      - { label: "Notas / Descripción", name: "body", widget: "markdown", required: false }
+
+  - name: "videos"
+    label: "Videos"
+    label_singular: "Video"
+    folder: "content/videos"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "DD/MM/YYYY", timeFormat: false }
+      - label: "Tipo"
+        name: "tipo"
+        widget: "select"
+        options:
+          - { label: "Sermón", value: "sermon" }
+          - { label: "Conferencia", value: "conferencia" }
+          - { label: "Clase teológica", value: "clase" }
+          - { label: "Devocional", value: "devocional" }
+          - { label: "Entrevista", value: "entrevista" }
+      - { label: "Link de YouTube", name: "youtube_url", widget: "string" }
+      - { label: "Duración (ej: 48 min)", name: "duracion", widget: "string", required: false }
+      - { label: "Descripción breve", name: "resumen", widget: "text", required: false }
+
+  - name: "descargas"
+    label: "Descargas"
+    label_singular: "Recurso"
+    folder: "content/descargas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título del recurso", name: "title", widget: "string" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - label: "Categoría"
+        name: "categoria"
+        widget: "select"
+        options:
+          - { label: "Documento teológico", value: "teologico" }
+          - { label: "Guía de estudio bíblico", value: "estudio" }
+          - { label: "Presentación", value: "presentacion" }
+          - { label: "Paquete de audio", value: "audio" }
+      - label: "Formato"
+        name: "formato"
+        widget: "select"
+        options:
+          - { label: "PDF", value: "PDF" }
+          - { label: "Word (DOCX)", value: "DOC" }
+          - { label: "PowerPoint (PPTX)", value: "PPT" }
+          - { label: "Audio (MP3/ZIP)", value: "MP3" }
+      - { label: "Archivo", name: "archivo", widget: "file" }
