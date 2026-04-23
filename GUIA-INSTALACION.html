@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de instalación — hugojavierpino.org</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Playfair+Display:wght@400;600&display=swap');
+  :root{--verde:#1a3d2b;--dorado:#8a7040;--crema:#f5f0e8;--texto:#2a2118;--texto-sec:#5a4e3a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Crimson Pro',Georgia,serif;background:var(--crema);color:var(--texto);line-height:1.75;font-size:18px;max-width:780px;margin:0 auto;padding:3rem 2rem}
+  h1{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:400;color:var(--verde);margin-bottom:0.3rem}
+  .subtitle{color:var(--dorado);font-style:italic;margin-bottom:2.5rem;font-size:1rem}
+  h2{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;color:var(--verde);margin:2.5rem 0 0.8rem;padding-bottom:0.4rem;border-bottom:2px solid var(--dorado)}
+  h3{font-size:1rem;font-weight:600;color:var(--verde);margin:1.2rem 0 0.3rem;letter-spacing:0.02em}
+  p{color:var(--texto-sec);margin-bottom:0.9rem}
+  .step{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
+  .step-num{background:var(--verde);color:var(--crema);font-family:'Playfair Display',serif;font-size:1.1rem;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .step-body h3{margin-top:0}
+  code{background:rgba(26,61,43,0.08);color:var(--verde);padding:0.15rem 0.4rem;font-family:monospace;font-size:0.9rem;border-radius:3px}
+  .alerta{background:#fff;border-left:3px solid var(--dorado);padding:0.9rem 1.2rem;margin:1.5rem 0;font-size:0.95rem}
+  .alerta strong{color:var(--dorado)}
+  a{color:var(--dorado)}
+  ul{color:var(--texto-sec);padding-left:1.3rem;margin-bottom:0.9rem}
+  ul li{margin-bottom:0.3rem}
+  .seccion{border:0.5px solid rgba(26,61,43,0.2);padding:1.2rem 1.4rem;margin-bottom:1rem;background:#fff}
+  .seccion h3{margin-top:0;font-size:1.05rem}
+  footer{margin-top:3rem;padding-top:1.5rem;border-top:0.5px solid rgba(26,61,43,0.2);font-size:0.85rem;color:var(--texto-sec);text-align:center}
+</style>
+</head>
+<body>
+
+<h1>Guía de configuración</h1>
+<p class="subtitle">hugojavierpino.org · Panel de administración con Netlify CMS</p>
+
+<p>Esta guía te explica paso a paso cómo conectar GitHub con Netlify para poder publicar artículos, sermones, videos y descargas desde un panel visual, sin tocar código.</p>
+
+<div class="alerta">
+  <strong>Tiempo estimado:</strong> 20–30 minutos la primera vez. Después, publicar contenido nuevo tarda menos de 2 minutos.
+</div>
+
+<h2>Parte 1 — Crear tu cuenta en GitHub</h2>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-body">
+    <h3>Registrarte en GitHub</h3>
+    <p>Andá a <a href="https://github.com" target="_blank">github.com</a> y creá una cuenta gratuita. Elegí un nombre de usuario simple, por ejemplo <code>hugopino</code> o <code>hjpino</code>.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-body">
+    <h3>Crear un repositorio nuevo</h3>
+    <p>Una vez dentro de GitHub, hacé clic en el botón verde <strong>"New"</strong> o <strong>"+"</strong> en la esquina superior derecha → <strong>New repository</strong>.</p>
+    <ul>
+      <li>Nombre del repositorio: <code>hugojavierpino</code></li>
+      <li>Visibilidad: <strong>Public</strong> (necesario para Netlify CMS gratuito)</li>
+      <li>Marcá la opción <strong>"Add a README file"</strong></li>
+      <li>Clic en <strong>Create repository</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-body">
+    <h3>Subir los archivos del sitio</h3>
+    <p>En tu repositorio recién creado, hacé clic en <strong>"Add file" → "Upload files"</strong>. Descomprimí el ZIP del sitio y arrastrá <strong>todos los archivos y carpetas</strong> a esa pantalla. Después hacé clic en <strong>"Commit changes"</strong>.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">4</div>
+  <div class="step-body">
+    <h3>Editar el archivo de configuración del CMS</h3>
+    <p>En tu repositorio, andá a la carpeta <code>admin</code> → hacé clic en <code>config.yml</code> → clic en el ícono de lápiz (editar). Buscá esta línea:</p>
+    <p><code>repo: TU-USUARIO-GITHUB/hugojavierpino</code></p>
+    <p>Reemplazá <code>TU-USUARIO-GITHUB</code> por tu nombre de usuario real de GitHub. Guardá haciendo clic en <strong>"Commit changes"</strong>.</p>
+  </div>
+</div>
+
+<h2>Parte 2 — Conectar Netlify con GitHub</h2>
+
+<div class="step">
+  <div class="step-num">5</div>
+  <div class="step-body">
+    <h3>Importar el sitio desde GitHub</h3>
+    <p>En Netlify, en lugar de arrastrar la carpeta como antes, andá a <strong>Sites → Add new site → Import an existing project</strong>. Elegí <strong>GitHub</strong> y autorizá el acceso. Seleccioná el repositorio <code>hugojavierpino</code>.</p>
+    <p>En la configuración del deploy, dejá todo como está y hacé clic en <strong>Deploy site</strong>. En 1–2 minutos el sitio va a estar publicado.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">6</div>
+  <div class="step-body">
+    <h3>Agregar tu dominio</h3>
+    <p>En Netlify → <strong>Domain settings → Add custom domain</strong> → escribí <code>hugojavierpino.org</code>. Netlify te va a dar los nameservers para configurar donde compraste el dominio.</p>
+  </div>
+</div>
+
+<h2>Parte 3 — Activar el panel de administración</h2>
+
+<div class="step">
+  <div class="step-num">7</div>
+  <div class="step-body">
+    <h3>Habilitar Netlify Identity</h3>
+    <p>En Netlify → tu sitio → pestaña <strong>Identity</strong> → clic en <strong>"Enable Identity"</strong>. Esto crea tu sistema de login para el panel.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">8</div>
+  <div class="step-body">
+    <h3>Habilitar Git Gateway</h3>
+    <p>Dentro de Identity → <strong>Services → Enable Git Gateway</strong>. Esto conecta el panel con tu repositorio de GitHub.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">9</div>
+  <div class="step-body">
+    <h3>Crear tu usuario de administrador</h3>
+    <p>Todavía en Identity → <strong>Invite users</strong> → ingresá tu email personal. Te va a llegar un correo de invitación. Hacé clic en el link, creá tu contraseña, y listo.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">10</div>
+  <div class="step-body">
+    <h3>¡Entrar al panel!</h3>
+    <p>Andá a <strong>hugojavierpino.org/admin</strong>. Vas a ver el panel de administración. Desde ahí podés:</p>
+    <ul>
+      <li>Escribir y publicar artículos del blog</li>
+      <li>Agregar sermones con sus archivos de audio</li>
+      <li>Cargar videos con el link de YouTube</li>
+      <li>Subir recursos para descarga</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Cómo publicar contenido nuevo</h2>
+
+<div class="seccion">
+  <h3>Publicar un artículo del blog</h3>
+  <p>Panel → <strong>Blog → New Artículo</strong> → completás título, categoría, fecha, resumen y cuerpo del texto → <strong>Publish</strong>. En 30 segundos aparece en el sitio.</p>
+</div>
+
+<div class="seccion">
+  <h3>Subir un sermón en audio</h3>
+  <p>Panel → <strong>Audios / Sermones → New Sermón</strong> → completás el título, serie, pasaje bíblico → subís el MP3 o pegás el link de SoundCloud/Spotify → <strong>Publish</strong>.</p>
+</div>
+
+<div class="seccion">
+  <h3>Agregar un video</h3>
+  <p>Panel → <strong>Videos → New Video</strong> → pegás el link de YouTube, completás el tipo y descripción → <strong>Publish</strong>.</p>
+</div>
+
+<div class="seccion">
+  <h3>Subir un recurso descargable</h3>
+  <p>Panel → <strong>Descargas → New Recurso</strong> → subís el PDF/DOCX/MP3 y completás el título → <strong>Publish</strong>.</p>
+</div>
+
+<div class="alerta">
+  <strong>Tip:</strong> Para los audios, podés usar SoundCloud o Anchor (Spotify for Podcasters) de forma gratuita y pegar el link en el campo correspondiente. Así no usás el espacio de Netlify para archivos pesados.
+</div>
+
+<h2>Resumen de servicios utilizados</h2>
+<ul>
+  <li><strong>GitHub</strong> — gratuito — guarda los archivos del sitio</li>
+  <li><strong>Netlify</strong> — gratuito (plan Starter) — publica el sitio y da el panel CMS</li>
+  <li><strong>Netlify CMS</strong> — gratuito — el panel visual de administración</li>
+  <li><strong>Dominio hugojavierpino.org</strong> — el que ya tenés</li>
+</ul>
+
+<footer>
+  Guía preparada para Hugo Javier Pino · hugojavierpino.org · 2025
+</footer>
+
+</body>
+</html>
